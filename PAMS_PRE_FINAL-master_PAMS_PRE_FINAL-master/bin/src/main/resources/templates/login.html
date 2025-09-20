@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+   <form th:action="@{/login}" method="post" autocomplete="off">
+  <h2>Login</h2>
+  <input type="text" name="email" placeholder="Email" required />
+  <input type="password" name="password" placeholder="Password" required />
+  <select name="role" required>
+      <option value="patient">Patient</option>
+      <option value="doctor">Doctor</option>
+      <option value="admin">Admin</option>
+  </select>
+  <button type="submit">Login</button>
+  <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+</form>
+
+
+  </div>
+  <!--  <script>
+
+     $(document).ready(function() {
+       // Check if user is already logged in
+       const loggedInUser = localStorage.getItem('loggedInUser');
+       if (loggedInUser) {
+         // Redirect to dashboard if already logged in
+         window.location.href = "dashboard.html";
+       }
+     });
+   function submitLogin(event) {
+     event.preventDefault(); // Prevent form from submitting normally
+     const username = document.getElementById('loginUsername').value;
+     const password = document.getElementById('loginPassword').value;
+
+     if (username.trim() === "" || password.trim() === "") {
+       alert("Please enter both username and password.");
+       return;
+   }
+
+    // Store username in localStorage
+     localStorage.setItem('loggedInUser', username);
+
+   //Redirect to dashboard.html
+    window.location.href = "dashboard.html";
+  }
+</script>
+-->
+</body>
+
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Appointment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Book an Appointment</h2>
+
+    <form th:action="@{/appointment/book}" method="post">
+    <input type="hidden" name="patientId" th:value="${patientId}" />
+
+    <label for="doctor">Select Doctor</label>
+    <select name="doctorId" id="doctor" class="form-control" required>
+        <option value="">-- Select Doctor --</option>
+        <option th:each="doc : ${doctors}" 
+                th:value="${doc.doctorId}" 
+                th:text="${doc.name + ' - ' + doc.specialization}"></option>
+    </select>
+
+    <label for="appointmentDate">Select Date</label>
+    <input type="date" name="appointmentDate" id="appointmentDate" class="form-control" required />
+
+    <label for="timeSlot">Available Time Slots</label>
+    <select name="timeSlot" id="timeSlot" class="form-control" required>
+        <option value="">-- Select Time Slot --</option>
+    </select>
+
+    <button type="submit" class="btn btn-success w-100 mt-3">Confirm Booking</button>
+</form>
+
+<script>
+function loadSlots() {
+    const doctorId = document.getElementById("doctor").value;
+    const date = document.getElementById("appointmentDate").value;
+    if (doctorId && date) {
+        fetch(`/appointment/slots?doctorId=${doctorId}&date=${date}`)
+            .then(res => res.json())
+            .then(data => {
+                const slotDropdown = document.getElementById("timeSlot");
+                slotDropdown.innerHTML = '<option value="">-- Select Time Slot --</option>';
+                if (data.length === 0) {
+                    slotDropdown.innerHTML += '<option disabled>No slots available</option>';
+                } else {
+                    data.forEach(slot => {
+                        const opt = document.createElement("option");
+                        opt.value = slot;
+                        opt.textContent = slot;
+                        slotDropdown.appendChild(opt);
+                    });
+                }
+            });
+    }
+}
+document.getElementById("doctor").addEventListener("change", loadSlots);
+document.getElementById("appointmentDate").addEventListener("change", loadSlots);
+</script>
+
+</body>
+</html>

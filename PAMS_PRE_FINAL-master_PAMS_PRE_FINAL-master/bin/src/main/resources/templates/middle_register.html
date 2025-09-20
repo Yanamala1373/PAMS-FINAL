@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Options</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, teal, lightblue);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .container h2 {
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: block;
+      width: 250px;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+    .doctor-btn {
+      background-color: #28a745;
+    }
+    .patient-btn {
+      background-color: #17a2b8;
+    }
+    .admin-btn {
+      background-color: #6f42c1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Register As</h2>
+    <button class="btn doctor-btn" onclick="window.location.href='/doctor/register'">Register as Doctor</button>
+    <button class="btn patient-btn" onclick="window.location.href='/patient/register'">Register as Patient</button>
+    <button class="btn admin-btn" onclick="window.location.href='/admin/register'">Register as Admin</button>
+  </div>
+</body>
+
+
+</html>
