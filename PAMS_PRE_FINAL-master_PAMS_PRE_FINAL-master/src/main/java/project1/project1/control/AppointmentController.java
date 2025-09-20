@@ -78,44 +78,55 @@ public class AppointmentController {
     public String bookAppointment(@RequestParam Long doctorId,
                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate appointmentDate,
                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime timeSlot,
-                                  Model model,
+                                  RedirectAttributes redirectAttributes,
                                   Authentication authentication) {
 
+        // Get logged-in patient from authentication
         String email = authentication.getName();
         Patient patient = patientRepository.findByEmail(email)
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
 
-        Appointment saved = appointmentService.bookAppointment(patient.getPatientId(), doctorId, appointmentDate, timeSlot);
+        // Book the appointment
+        Appointment saved = appointmentService.bookAppointment(
+                patient.getPatientId(), doctorId, appointmentDate, timeSlot
+        );
 
+        // Send confirmation notification
         String message = "Your appointment with Dr. " + saved.getDoctor().getName() +
                          " on " + saved.getAppointmentDate() +
                          " at " + saved.getTimeSlot() + " is confirmed.";
-
         notificationService.sendConfirmationNotification(patient.getPatientId(), message);
 
-        model.addAttribute("doctorName", saved.getDoctor().getName());
-        model.addAttribute("timeSlot", saved.getTimeSlot());
-        model.addAttribute("appointmentDate", saved.getAppointmentDate());
+        // Add flash message for dashboard
+        redirectAttributes.addFlashAttribute("message", message);
 
-        return "appointment-confirmation";
+        // Redirect directly to dashboard so it reloads with updated appointments
+        return "redirect:/patient/dashboard";
     }
 
-    // Cancel appointment (no patientId param)
+
     @PostMapping("/cancel")
     public String cancelAppointment(@RequestParam Long appointmentId,
                                     RedirectAttributes redirectAttributes,
                                     Authentication authentication) {
 
+        // Get logged-in patient
         String email = authentication.getName();
         Patient patient = patientRepository.findByEmail(email)
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
 
-        appointmentService.cancelAppointment(appointmentId);
+        // Cancel appointment with ownership check in service
+        appointmentService.cancelAppointment(appointmentId, patient.getPatientId());
+
+        // Add success message for dashboard
         redirectAttributes.addFlashAttribute("message", "Appointment cancelled successfully.");
+
+        // Redirect to dashboard so updated data is shown
         return "redirect:/patient/dashboard";
     }
+
 }

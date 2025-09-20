@@ -61,18 +61,31 @@ public class AppointmentService {
      * Cancels an appointment by marking its status as CANCELLED (soft delete).
      */
     @Transactional
-    public void cancelAppointment(Long appointmentId) {
-        Appointment appointment = appointmentRepository.findById(appointmentId)
+    public void cancelAppointment(Long appointmentId, Long patientId) {
+        Appointment appt = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
 
-        appointment.setStatus(Appointment.Status.CANCELLED);
-        appointmentRepository.save(appointment);
+        if (!appt.getPatient().getPatientId().equals(patientId)) {
+            throw new SecurityException("You cannot cancel another patient's appointment");
+        }
 
-        notificationService.sendConfirmationNotification(
-                appointment.getPatient().getPatientId(),
-                "Appointment cancelled successfully."
-        );
+        appt.setStatus(Appointment.Status.CANCELLED);
+        appointmentRepository.save(appt);
     }
+
+    
+//    public void cancelAppointment(Long appointmentId) {
+//        Appointment appointment = appointmentRepository.findById(appointmentId)
+//                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+//
+//        appointment.setStatus(Appointment.Status.CANCELLED);
+//        appointmentRepository.save(appointment);
+//
+//        notificationService.sendConfirmationNotification(
+//                appointment.getPatient().getPatientId(),
+//                "Appointment cancelled successfully."
+//        );
+//    }
 
     /**
      * Returns all appointments for a given patient (BOOKED + CANCELLED + COMPLETED).

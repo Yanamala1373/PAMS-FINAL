@@ -48,6 +48,7 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/doctor/**").hasRole("DOCTOR")
                 .requestMatchers("/patient/**").hasRole("PATIENT")
+                .requestMatchers("/appointment/**").hasRole("PATIENT") // ✅ Only patients can book/cancel
 
                 // Everything else requires authentication
                 .anyRequest().authenticated()

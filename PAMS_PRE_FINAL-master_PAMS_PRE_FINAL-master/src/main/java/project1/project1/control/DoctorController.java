@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project1.project1.DAO.DoctorRepository;
@@ -90,6 +91,9 @@ public class DoctorController {
         return "doctor-update-availability";
     }
 
+    
+    
+    
     // Handle availability submission (ownership enforced via authentication)
     @PostMapping("/updateAvailability")
     public String updateAvailability(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
@@ -110,4 +114,18 @@ public class DoctorController {
         redirectAttributes.addFlashAttribute("message", "Availability updated successfully!");
         return "redirect:/doctor/dashboard";
     }
+    
+    @GetMapping("/appointments")
+    @ResponseBody
+    public List<Appointment> getAppointments(Authentication authentication) {
+        String email = authentication.getName();
+        Doctor loggedInDoctor = doctorRepository.findByEmail(email)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Doctor not found"));
+
+        return doctorService.viewDoctorSchedule(loggedInDoctor.getDoctorId());
+    }
+
+    
 }

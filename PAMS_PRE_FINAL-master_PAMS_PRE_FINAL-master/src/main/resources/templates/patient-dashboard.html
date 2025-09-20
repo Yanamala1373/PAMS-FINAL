@@ -6,7 +6,7 @@
 </head>
 <body class="bg-light">
     <!-- Flash message -->
-    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${message}" id ="flashMessage" class="alert alert-success" th:text="${message}"></div>
 
     <nav class="navbar navbar-dark bg-primary mb-4">
         <div class="container-fluid">
@@ -94,4 +94,24 @@
         </div>
     </div>
 </body>
+<!-- Auto-hide the flash message after 3 seconds -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById('flashMessage');
+        if (!el) return;
+
+        // Auto-close via Bootstrap API (if available)
+        setTimeout(() => {
+          if (window.bootstrap && window.bootstrap.Alert) {
+            const alert = bootstrap.Alert.getOrCreateInstance(el);
+            alert.close();
+          } else {
+            // Fallback: fade out and remove (no Bootstrap JS)
+            el.style.transition = 'opacity 0.5s ease';
+            el.style.opacity = '0';
+            setTimeout(() => el.remove(), 500);
+          }
+        }, 3000);
+      });
+    </script>
 </html>
