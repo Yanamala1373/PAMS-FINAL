@@ -40,9 +40,9 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 // Public endpoints
-                .requestMatchers("/", "/index", "/register", "/register-choice",
-                                 "/patient/register", "/doctor/register", "/admin/register",
-                                 "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/", "/index", "/book-appointment", "/register-choice", "/login",
+                                 "/patient/register", "/doctor/register", "/admin/register","/bookAppointment",
+                                 "/css/**", "/js/**", "/images/**", "/fonts/**", "/favicon.ico").permitAll()
 
                 // Role-based restrictions
                 .requestMatchers("/admin/**").hasRole("ADMIN")
