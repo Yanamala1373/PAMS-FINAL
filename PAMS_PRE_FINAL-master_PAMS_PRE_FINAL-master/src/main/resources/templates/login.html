@@ -61,45 +61,23 @@
   <h2>Login</h2>
   <input type="text" name="email" placeholder="Email" required />
   <input type="password" name="password" placeholder="Password" required />
-  <select name="role" required>
+  <select name="role"  class ="forn-control mb-3 "  required>
+  <option value="" disabled selected>Select Role</option>
       <option value="patient">Patient</option>
       <option value="doctor">Doctor</option>
       <option value="admin">Admin</option>
   </select>
   <button type="submit">Login</button>
-  <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+<!-- Error message -->
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<!-- Logout message (optional) -->
+<p th:if="${message}" th:text="${message}" style="color:green;">
 </form>
 
 
   </div>
-  <!--  <script>
-
-     $(document).ready(function() {
-       // Check if user is already logged in
-       const loggedInUser = localStorage.getItem('loggedInUser');
-       if (loggedInUser) {
-         // Redirect to dashboard if already logged in
-         window.location.href = "dashboard.html";
-       }
-     });
-   function submitLogin(event) {
-     event.preventDefault(); // Prevent form from submitting normally
-     const username = document.getElementById('loginUsername').value;
-     const password = document.getElementById('loginPassword').value;
-
-     if (username.trim() === "" || password.trim() === "") {
-       alert("Please enter both username and password.");
-       return;
-   }
-
-    // Store username in localStorage
-     localStorage.setItem('loggedInUser', username);
-
-   //Redirect to dashboard.html
-    window.location.href = "dashboard.html";
-  }
-</script>
--->
+  
 </body>
 
 
