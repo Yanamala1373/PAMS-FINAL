@@ -31,7 +31,9 @@ Session and cache control for secure access
 
 Professional documentation and annotation mapping
 
+
 🛠️ Technologies Used
+
 Java (Backend logic and service layer)
 
 Spring Boot (Framework for building RESTful services and MVC architecture)
@@ -48,7 +50,9 @@ JPA / Hibernate (ORM for database interaction)
 
 JUnit / Mockito (Unit testing and service validation)
 
+
 📂 Project Structure
+
 The project follows a clean MVC architecture with separate layers for:
 
 Controllers
@@ -63,16 +67,8 @@ Configuration
 
 Templates (HTML views)
 
-🚀 Getting Started
-To run the project locally:
 
-Clone the repository
-
-Set up MySQL database and update credentials
-
-Run the Spring Boot application
-
-Access the app via localhost:8080
+ **Spring Security**
 
 Spring Security stores your login in the HTTP session (backed by a session cookie like JSESSIONID).
 
