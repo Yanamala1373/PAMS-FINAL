@@ -1,3 +1,79 @@
+🏥 Patient Appointment Management System
+
+The Patient Appointment Management System is a comprehensive web-based platform designed to streamline hospital operations by enabling seamless interaction between patients, doctors, and administrators. It provides a centralized solution for managing registrations, logins, appointments, and role-based dashboards, ensuring a smooth and secure experience for all users.
+
+This system is built to support multi-role access with tailored workflows for each user type, including patients booking appointments, doctors managing schedules, and admins overseeing operations. It emphasizes usability, security, and maintainability — making it suitable for real-world deployment in clinics, hospitals, or healthcare startups.
+
+👥 User Roles
+
+Patient: Can register, log in, book appointments, and view appointment history.
+
+Doctor: Can register, log in, view assigned appointments, and update statuses.
+
+Admin: Can register, log in, and manage hospital-wide operations and user oversight.
+
+
+🎯 Key Features
+
+Secure registration and login for all roles
+
+Role-based dashboards with session-based access
+
+Appointment booking and status tracking
+
+Live dashboard updates for doctors
+
+Validation for user inputs (e.g., gmail format, username and password authentication)
+
+Clear navigation and user-friendly interface
+
+Session and cache control for secure access
+
+Professional documentation and annotation mapping
+
+🛠️ Technologies Used
+Java (Backend logic and service layer)
+
+Spring Boot (Framework for building RESTful services and MVC architecture)
+
+Spring Security (Authentication and role-based authorization)
+
+Thymeleaf (Server-side HTML rendering)
+
+HTML / CSS / Bootstrap (Frontend design and responsiveness)
+
+MySQL (Relational database for storing user and appointment data)
+
+JPA / Hibernate (ORM for database interaction)
+
+JUnit / Mockito (Unit testing and service validation)
+
+📂 Project Structure
+The project follows a clean MVC architecture with separate layers for:
+
+Controllers
+
+Services
+
+Repositories (DAO)
+
+Models (Entities)
+
+Configuration
+
+Templates (HTML views)
+
+🚀 Getting Started
+To run the project locally:
+
+Clone the repository
+
+Set up MySQL database and update credentials
+
+Run the Spring Boot application
+
+Access the app via localhost:8080
+
 Spring Security stores your login in the HTTP session (backed by a session cookie like JSESSIONID).
 
       -->  In Chrome, all tabs in the same browser profile share the same cookies for a given site.
