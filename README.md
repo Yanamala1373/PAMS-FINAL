@@ -6,66 +6,66 @@ This system is built to support multi-role access with tailored workflows for ea
 
 👥 User Roles
 
-Patient: Can register, log in, book appointments, and view appointment history.
+      Patient: Can register, log in, book appointments, and view appointment history.
 
-Doctor: Can register, log in, view assigned appointments, and update statuses.
+      Doctor: Can register, log in, view assigned appointments, and update statuses.
 
-Admin: Can register, log in, and manage hospital-wide operations and user oversight.
+      Admin: Can register, log in, and manage hospital-wide operations and user oversight.
 
 
 🎯 Key Features
 
-Secure registration and login for all roles
+      Secure registration and login for all roles
 
-Role-based dashboards with session-based access
+      Role-based dashboards with session-based access      
 
-Appointment booking and status tracking
+      Appointment booking and status tracking
 
-Live dashboard updates for doctors
+      Live dashboard updates for doctors
 
-Validation for user inputs (e.g., gmail format, username and password authentication)
+      Validation for user inputs (e.g., gmail format, username and password authentication)
 
-Clear navigation and user-friendly interface
+      Clear navigation and user-friendly interface
 
-Session and cache control for secure access
+      Session and cache control for secure access
 
-Professional documentation and annotation mapping
+      Professional documentation and annotation mapping
 
 
 🛠️ Technologies Used
 
-Java (Backend logic and service layer)
+      Java (Backend logic and service layer)
 
-Spring Boot (Framework for building RESTful services and MVC architecture)
+      Spring Boot (Framework for building RESTful services and MVC architecture)
 
-Spring Security (Authentication and role-based authorization)
+      Spring Security (Authentication and role-based authorization)
 
-Thymeleaf (Server-side HTML rendering)
+      Thymeleaf (Server-side HTML rendering)
 
-HTML / CSS / Bootstrap (Frontend design and responsiveness)
+      HTML / CSS / Bootstrap (Frontend design and responsiveness)
 
-MySQL (Relational database for storing user and appointment data)
+      MySQL (Relational database for storing user and appointment data)
 
-JPA / Hibernate (ORM for database interaction)
+      JPA / Hibernate (ORM for database interaction)
 
-JUnit / Mockito (Unit testing and service validation)
+      JUnit / Mockito (Unit testing and service validation)
 
 
 📂 Project Structure
 
 The project follows a clean MVC architecture with separate layers for:
 
-Controllers
+            Controllers
 
-Services
+            Services
 
-Repositories (DAO)
+            Repositories (DAO)
 
-Models (Entities)
+            Models (Entities)
 
-Configuration
+            Configuration
 
-Templates (HTML views)
+            Templates (HTML views)
 
 
  **Spring Security**
